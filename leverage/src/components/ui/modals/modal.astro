@@ -1,0 +1,65 @@
+---
+const { id, open } = Astro.props;
+---
+
+<button
+  class="px-6 py-3 bg-blue-600 text-white font-bold rounded-lg"
+  onclick={`document.getElementById('${id}').showModal()`}>
+  {open}
+</button>
+
+<dialog id={id} class="max-w-xl w-full bg-white rounded-lg shadow-lg relative p-6">
+  <!-- X Close Button in the corner -->
+  <button
+    class="absolute top-3 right-3 text-gray-500 hover:text-gray-700"
+    onclick={`document.getElementById('${id}').close()`}>
+    ✕
+  </button>
+  <slot name="main" />
+  <form method="dialog" class="space-y-4">
+    <slot name="close" />
+  </form>
+</dialog>
+
+<style lang="css">
+  dialog {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    padding: 0;
+    border: none;
+    width: 100%;
+    max-width: 600px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  }
+
+  dialog::backdrop {
+    background: rgba(0, 0, 0, 0.6);
+    position: fixed;
+    inset: 0;
+  }
+
+  /* Padding for the modal content */
+  .p-6 {
+    padding: 1.5rem;
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    // Cast to HTMLDialogElement to ensure the close() method is recognized
+    const modal = document.getElementById('${id}') as HTMLDialogElement | null;
+
+    if (modal) {
+      // Allow clicking outside the modal to close it
+      modal.addEventListener('click', function(event) {
+        // Close if clicking directly on the backdrop (not the modal content)
+        if (event.target === modal) {
+          modal.close();
+        }
+      });
+    }
+  });
+</script>
+

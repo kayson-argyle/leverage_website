@@ -1,12 +1,14 @@
 ---
-const { id, open } = Astro.props;
+const { id, open, hideButton = false } = Astro.props;
 ---
 
-<button
-  class="px-6 py-3 bg-blue-600 text-white font-bold rounded-lg"
-  onclick={`document.getElementById('${id}').showModal()`}>
-  {open}
-</button>
+{!hideButton && (
+  <button
+    class="px-6 py-3 bg-blue-600 text-white font-bold rounded-lg"
+    onclick={`document.getElementById('${id}').showModal()`}>
+    {open}
+  </button>
+)}
 
 <dialog id={id} class="max-w-xl w-full bg-white rounded-lg shadow-lg relative p-6">
   <!-- X Close Button in the corner -->
@@ -15,7 +17,11 @@ const { id, open } = Astro.props;
     onclick={`document.getElementById('${id}').close()`}>
     ✕
   </button>
+
+  <!-- Dynamically insert content via slots -->
   <slot name="main" />
+
+  <!-- Optional close form content -->
   <form method="dialog" class="space-y-4">
     <slot name="close" />
   </form>
@@ -24,9 +30,6 @@ const { id, open } = Astro.props;
 <style lang="css">
   dialog {
     position: fixed;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
     padding: 0;
     border: none;
     width: 100%;
@@ -44,22 +47,27 @@ const { id, open } = Astro.props;
   .p-6 {
     padding: 1.5rem;
   }
+
+  @media (max-width: 768px) {
+    dialog {
+      max-width: 95%;
+      width: 95%;
+    }
+  }
 </style>
 
 <script>
   document.addEventListener('DOMContentLoaded', function () {
-    // Cast to HTMLDialogElement to ensure the close() method is recognized
-    const modal = document.getElementById('${id}') as HTMLDialogElement | null;
-
+    const modal = document.getElementById('${id}');
     if (modal) {
-      // Allow clicking outside the modal to close it
       modal.addEventListener('click', function(event) {
-        // Close if clicking directly on the backdrop (not the modal content)
         if (event.target === modal) {
-          modal.close();
+            const dialog = modal.closest('dialog');
+            if (dialog) {
+              dialog.close();
+            }
         }
       });
     }
   });
 </script>
-

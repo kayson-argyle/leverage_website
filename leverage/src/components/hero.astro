@@ -1,10 +1,10 @@
 ---
 import { Picture } from "astro:assets";
-import heroImage from "assets/hero.png";
+import heroImage from "assets/hero-rocket.webp";
 import Link from "@components/ui/link.astro";
 import { Icon } from "astro-icon/components";
 // import { rotateTagline } from "@components/ui/rotateTagline.ts";
-import Modal from "@components/ui/modals/modal.astro";
+import ReportModal from "@components/ui/modals/Report/report-modal.astro";
 
 let isModalOpen = false;
 
@@ -17,56 +17,45 @@ function closeModal() {
 }
 ---
 
-<main class="grid lg:grid-cols-2 place-items-center pt-16 pb-8 md:pt-12 md:pb-24 font-sans">
+<main
+  class="grid lg:grid-cols-2 place-items-center pt-16 pb-8 md:pt-12 md:pb-24 font-sans">
   <div class="py-6 md:order-1 hidden md:block">
     <Picture
       src={heroImage}
-      alt="Astronaut in the air"
+      alt="Rocket in the air"
       widths={[200, 400, 600]}
       sizes="(max-width: 800px) 100vw, 620px"
       loading="eager"
       format="avif"
+      class="tilt-left"
     />
+    <!-- Add this CSS to apply the tilt -->
+    <style lang="css">
+      .tilt-left {
+        transform: rotate(-20deg) scale(1.2); /* Adjust the degree to control the tilt */
+      }
+    </style>
   </div>
   <div>
-    <h1 class="text-5xl lg:text-6xl xl:text-7xl font-bold lg:tracking-tight xl:tracking-tighter">
-      Rank your business on <span id="rotating-tagline" class="text-blue-500 whitespace-nowrap">ChatGPT</span><br> with Leverage.
+    <h1
+      class="text-5xl lg:text-6xl xl:text-7xl font-bold lg:tracking-tight xl:tracking-tighter">
+      Rank your business on <span
+        id="rotating-tagline"
+        class="text-blue-500 whitespace-nowrap">ChatGPT</span
+      ><br /> with Leverage.
     </h1>
     <p class="text-lg mt-4 text-slate-600 max-w-xl">
-      Leverage helps businesses rank higher in search results on popular consumer-based AI platforms like ChatGPT, Gemini, and Meta AI.
+      Leverage helps businesses rank higher in search results on popular
+      consumer-based AI platforms like ChatGPT, Gemini, and Meta AI.
     </p>
     <div class="mt-6 flex flex-col sm:flex-row gap-3">
-       <!-- Modal for Waitlist Sign-up Form -->
-       <Modal id="waitlistModal" open="See how you rank">
-        <main slot="main">
-          <h2 class="text-2xl font-bold mb-4">See how you rank</h2>
-          <form id="waitlistForm" class="space-y-4">
-            <div>
-              <label for="name" class="block text-sm font-medium">Name</label>
-              <input
-                type="text"
-                id="name"
-                name="name"
-                class="block w-full p-2 mt-1 border border-gray-300 rounded-md"
-                required />
-            </div>
-            <div>
-              <label for="email" class="block text-sm font-medium">Email</label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                class="block w-full p-2 mt-1 border border-gray-300 rounded-md"
-                required />
-            </div>
-            <button
-              type="submit"
-              class="w-full px-4 py-2 bg-blue-600 text-white font-bold rounded-lg">
-              Sign Up
-            </button>
-          </form>
-        </main>
-      </Modal>
+      <!-- External Button to Trigger Modal -->
+      <button
+        class="px-6 py-3 bg-blue-600 text-white font-bold rounded-lg"
+        onclick="document.getElementById('reportModal').showModal()">
+        See how you rank
+      </button>
+      <ReportModal />
       <!-- <Link
         href="#"
         class="flex gap-1 items-center justify-center"
@@ -86,10 +75,11 @@ function closeModal() {
       </Link> -->
     </div>
   </div>
-</main>
 
-<!-- Load RotateTagline function -->
-<script >
-  import { rotateTagline } from '../utils/rotateTagline.ts';
-  rotateTagline();
-</script>
+  <!-- Load RotateTagline function -->
+  <script>
+    // rotateTagline();
+    import { rotateTagline } from "@utils/rotateTagline.ts";
+    rotateTagline();
+  </script>
+</main>

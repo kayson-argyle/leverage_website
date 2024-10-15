@@ -4,7 +4,14 @@ import Link from "@components/ui/link.astro";
 import Dropdown from "./dropdown.astro";
 import { Astronav, MenuItems, MenuIcon } from "astro-navbar";
 
-const menuitems = [
+type MenuItem = {
+  title: string;
+  path: string;
+  children?: MenuItem[];
+  badge?: boolean; // Add the badge property
+};
+
+const menuitems: MenuItem[] = [
   {
     title: "Features",
     path: "#",
@@ -39,15 +46,13 @@ const menuitems = [
 ];
 ---
 
-
 <Container>
   <header class="flex flex-col lg:flex-row justify-between items-center my-5">
     <Astronav>
       <div class="flex w-full lg:w-auto items-center justify-between">
         <a href="/" class="text-lg"
           ><span class="font-bold text-slate-800">Leverage</span><span
-            class="text-slate-500"></span
-          >
+            class="text-slate-500"></span>
         </a>
         <div class="block lg:hidden">
           <MenuIcon class="w-4 h-4 text-gray-800" />
@@ -72,7 +77,7 @@ const menuitems = [
                       href={item.path}
                       class="flex lg:px-3 py-2 items-center text-gray-600 hover:text-gray-900">
                       <span> {item.title}</span>
-                      {item.badge && (
+                      {item.badge && ( // Fix the problem here
                         <span class="ml-1 px-2 py-0.5 text-[10px] animate-pulse font-semibold uppercase text-white bg-indigo-600 rounded-full">
                           New
                         </span>
@@ -85,16 +90,16 @@ const menuitems = [
           }
         </ul>
         <div class="lg:hidden flex items-center mt-3 gap-4">
-          <Link href="#" style="muted" block size="md">Log in</Link>
-          <Link href="#" size="md" block>Try now</Link>
+          <!-- <Link href="#" style="muted" block size="md">Log in</Link> -->
+            <Link href="#" size="md" block onclick="document.getElementById('reportModal').showModal()">Try now</Link>
         </div>
       </MenuItems>
     </Astronav>
-    <!-- // <div>
-    //   <div class="hidden lg:flex items-center gap-4">
-    //     <a href="#">Log in</a>
-    //     <Link href="#" size="md">Sign up</Link>
-    //   </div> -->
+    <div>
+      <div class="hidden lg:flex items-center gap-4">
+        <!-- <a href="#">Log in</a> -->
+        <Link href="#" size="md" onclick="document.getElementById('reportModal').showModal()">Try now</Link>
+      </div>
     </div>
   </header>
 </Container>

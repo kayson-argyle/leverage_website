@@ -1,0 +1,31 @@
+---
+import Layout from "@layouts/Layout.astro";
+import Container from "@components/container.astro";
+import Sectionhead from "@components/sectionhead.astro";
+import Rocket from "@assets/hero-rocket.webp";
+import { Picture } from "astro:assets";
+---
+
+<Layout title="Thank You">
+  <Container>
+    <Sectionhead>
+      <Fragment slot="title">Thank You!</Fragment>
+      <Fragment slot="desc">We appreciate your support.</Fragment>
+    </Sectionhead>
+
+    <section
+      class="flex flex-col justify-center items-center py-16 text-center max-w-3xl mx-auto">
+      <p class="text-lg lg:text-xl text-gray-600 mb-8">
+        One of our team members will get in touch with you shortly.
+      </p>
+
+      <div class="mt-10">
+        <a
+          href="/"
+          class="px-6 py-3 bg-blue-600 text-white font-bold rounded-lg hover:bg-blue-700">
+          Back to Home
+        </a>
+      </div>
+    </section>
+  </Container>
+</Layout>

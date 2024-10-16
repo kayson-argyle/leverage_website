@@ -22,7 +22,8 @@ const { id, open, hideButton = false } = Astro.props;
   <slot name="main" />
 
   <!-- Optional close form content -->
-  <form method="dialog" class="space-y-4">
+  <!-- Remove method="dialog" to prevent the modal from closing automatically -->
+  <form class="space-y-4">
     <slot name="close" />
   </form>
 </dialog>

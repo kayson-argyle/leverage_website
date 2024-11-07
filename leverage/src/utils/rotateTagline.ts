@@ -1,5 +1,5 @@
 export function rotateTagline(): void {
-  const taglines: string[] = ['LLMs', 'ChatGPT', 'Gemini', 'LLaMa', 'Claude'];
+  const taglines: string[] = ['ChatGPT', 'Gemini', 'Meta AI', 'Claude'];
   let currentTagline = 0;
 
   function updateTagline(): void {

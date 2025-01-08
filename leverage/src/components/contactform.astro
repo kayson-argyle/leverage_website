@@ -109,11 +109,11 @@ import Button from "./ui/button.astro";
         let json = await response.json();
         if (response.status == 200) {
           result.classList.add("text-green-500");
-          result.innerHTML = json.message;
+          result.innerHTML = "Success";
         } else {
           console.log(response);
           result.classList.add("text-red-500");
-          result.innerHTML = json.message;
+          result.innerHTML = "Error";
         }
       })
       .catch((error) => {

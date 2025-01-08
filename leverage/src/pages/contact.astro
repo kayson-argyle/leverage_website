@@ -3,7 +3,6 @@ import Contactform from "@components/contactform.astro";
 import Container from "@components/container.astro";
 import Sectionhead from "@components/sectionhead.astro";
 import Layout from "@layouts/Layout.astro";
-import { Icon } from "astro-icon/components";
 ---
 
 <Layout title="Contact">
@@ -15,26 +14,11 @@ import { Icon } from "astro-icon/components";
 
     <div class="grid md:grid-cols-2 gap-10 mx-auto max-w-4xl mt-16">
       <div>
-        <h2 class="font-medium text-2xl text-gray-800">Talk to a founder.</h2>
+        <h2 class="font-medium text-2xl text-gray-800">Talk to our founder.</h2>
         <p class="text-lg leading-relaxed text-slate-500 mt-3">
-          Want to learn more about what we're building? Fill out the form, send
-          an email or give us a call.
+          Want to learn more about what we're building? Fill out the form to the
+          right.
         </p>
-        <div class="mt-5">
-          <div class="flex items-center mt-2 space-x-2 text-gray-600">
-            <Icon class="text-gray-400 w-4 h-4" name="uil:map-marker" />
-            <span>Logan, UT 84321</span>
-          </div><div class="flex items-center mt-2 space-x-2 text-gray-600">
-            <Icon class="text-gray-400 w-4 h-4" name="uil:envelope" /><a
-              href="mailto:hello@astroshipstarter.com"
-              >hello@getleverage.pro</a
-            >
-          </div><div class="flex items-center mt-2 space-x-2 text-gray-600">
-            <Icon class="text-gray-400 w-4 h-4" name="uil:phone" /><a
-              href="tel:+1 (435) 890-7632">+1 (435) 890-7632</a
-            >
-          </div>
-        </div>
       </div>
       <div>
         <Contactform />

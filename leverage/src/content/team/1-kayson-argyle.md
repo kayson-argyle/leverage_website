@@ -1,7 +1,7 @@
 ---
 draft: false
 name: "Kayson Argyle"
-title: "Co-Founder"
+title: "CEO"
 avatar: {
     src: "/kayson.jpg",
     alt: "Kayson Argyle"
